@@ -63,16 +63,16 @@ class Trace_User_State extends State<Trace_User> {
                     GeoPoint position = await controller.myLocation();
                     if (route.isEmpty || route[route.length-1]!=position) {
                       debugPrint("\n route length ${route.length}\n");
-                      route.add(position);
-                      if (route.length > 3) {
-                        drawroute(route,controller);
-                        if (route.length > 40) {
-                          route.removeRange(0, 25);
-                        }
-                      }
                       if(route.isNotEmpty)
                       {distance += await distance2point(route[route.length-1],position);
                       debugPrint("${distance}");}
+                      route.add(position);
+                      if (route.length >= 3) {
+                        drawroute(route,controller);
+                        if (route.length > 15) {
+                          route.removeRange(0, 10);
+                        }
+                      }
 
                       debugPrint("${route}");
                     } else {
